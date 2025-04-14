@@ -6,15 +6,22 @@ const cstt_base_url = ENV_APP_CONFIG.CSTT_API_BASE_URL;
 
 export const fetchCsttData = async (payload) => {
   const convertedPayload = payloadConversion(payload);
-  
+
   const headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
   };
 
-  const response = await axios.post("/cstt-dev/api/CSTT", convertedPayload, {
-    headers,
-  });
+  const response = await axios.post(
+    `${cstt_base_url}/api/CSTT`,
+    convertedPayload,
+    {
+      headers,
+    }
+  );
+  // const response = await axios.post("/cstt-dev/api/CSTT", convertedPayload, {
+  //   headers,
+  // });
 
   return response.data;
 };
