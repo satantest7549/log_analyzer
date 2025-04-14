@@ -38,7 +38,7 @@ const App = () => {
   const error = csttError || analyzeError || bugCreatedError;
 
   useEffect(() => {
-    // Handle error case: show a toast when there is an error
+    // Handle error case: show a toast when there is an error 
     if (error) {
       const errorMessage =
         typeof error === "string"
