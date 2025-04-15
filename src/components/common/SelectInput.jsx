@@ -10,6 +10,18 @@ const SelectInput = ({ label, value, onChange, options }) => {
       value={value}
       onChange={onChange}
       margin="normal"
+      slotProps={{
+        select: {
+          MenuProps: {
+            PaperProps: {
+              style: {
+                maxHeight: 200,
+                overflowY: "auto",
+              },
+            },
+          },
+        },
+      }}
     >
       {options.map((option, index) => (
         <MenuItem key={`${option}_${index}`} value={option}>

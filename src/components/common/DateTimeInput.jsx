@@ -7,6 +7,7 @@ const DateTimeInput = ({
   onChange,
   fullWidth = true,
   margin = "normal",
+  max,
 }) => {
   return (
     <TextField
@@ -14,9 +15,14 @@ const DateTimeInput = ({
       type="datetime-local"
       fullWidth={fullWidth}
       margin={margin}
-      InputLabelProps={{ shrink: true }}
       value={value}
       onChange={onChange}
+      slotProps={{
+        inputLabel: { shrink: true },
+        htmlInput: {
+          max: max,
+        },
+      }}
     />
   );
 };

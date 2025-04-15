@@ -8,7 +8,7 @@ const TableCellWithTooltip = ({
   isHeader = false,
 }) => {
   const text = value.toString();
-  const shouldShowTooltip = text.length > 40;
+  const shouldShowTooltip = text.length > 20;
 
   const dynamicStyle = {
     ...(isHeader ? headerCellStyle : cellStyle),

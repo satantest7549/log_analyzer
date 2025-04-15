@@ -15,12 +15,13 @@ import { fetchAnalyzeRequest, fetchCustomAnalyzeRequest } from "../redux";
 import SelectInput from "./common/SelectInput";
 import DateTimeInput from "./common/DateTimeInput";
 import { APP_NM, MODULE_NM, Select_Question } from "../constants";
+import {
+  getCurrentFormattedDateTime,
+  getFormattedDateTimeNDaysAgo,
+  getTodayMaxDateTime,
+} from "../utils";
 
-const getFormattedDateTime = (date) => date.toISOString().slice(0, 16);
-
-const now = new Date();
-const oneWeekAgo = new Date();
-oneWeekAgo.setDate(now.getDate() - 7);
+const todayMax = getTodayMaxDateTime();
 
 const FilterFormDrawer = ({
   onSubmit,
@@ -32,9 +33,9 @@ const FilterFormDrawer = ({
   const [appName, setAppName] = useState(APP_NM[0]);
   const [selectQuestion, setSelectQuestion] = useState(Select_Question[0]);
   const [fromDateTime, setFromDateTime] = useState(
-    getFormattedDateTime(oneWeekAgo)
+    getFormattedDateTimeNDaysAgo(7)
   );
-  const [toDateTime, setToDateTime] = useState(getFormattedDateTime(now));
+  const [toDateTime, setToDateTime] = useState(getCurrentFormattedDateTime());
   const [customQuestionText, setCustomQuestionText] = useState("");
 
   const dispatch = useDispatch();
@@ -44,7 +45,6 @@ const FilterFormDrawer = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    
     onSubmit({ appName, errorModule, fromDateTime, toDateTime });
     // setDrawerOpen(false);
   };
@@ -85,13 +85,13 @@ const FilterFormDrawer = ({
 
         <form onSubmit={handleSubmit}>
           <SelectInput
-            label="APP_NM"
+            label="APP_NAME"
             value={appName}
             onChange={(e) => setAppName(e.target.value)}
             options={APP_NM}
           />
           <SelectInput
-            label="MODULE_NM"
+            label="MODULE_NAME"
             value={errorModule}
             onChange={(e) => setErrorModule(e.target.value)}
             options={MODULE_NM}
@@ -104,6 +104,7 @@ const FilterFormDrawer = ({
             InputLabelProps={{ shrink: true }}
             value={fromDateTime}
             onChange={(e) => setFromDateTime(e.target.value)}
+            max={todayMax}
           />
           <DateTimeInput
             label="To Date-Time"
@@ -113,6 +114,7 @@ const FilterFormDrawer = ({
             InputLabelProps={{ shrink: true }}
             value={toDateTime}
             onChange={(e) => setToDateTime(e.target.value)}
+            max={todayMax}
           />
           {finalCsttData.finalData.length > 0 && (
             <Alert severity="success" sx={{ mt: 2 }}>

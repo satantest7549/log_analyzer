@@ -4,6 +4,26 @@ export const MODULE_NM = [
   "ERRORLOG_SERVICE",
 ];
 
-export const APP_NM = ["WORKCENTER_ASSIGNMENT"];
+export const APP_NM = [
+  "WORKCENTER_ASSIGNMENT",
+  // "TOTAL_LOSS",
+  // "PARTIALLOSS",
+  // "CARR",
+  // "REPAIRCENTER",
+  // "CORESERVICES",
+  // "WORKCENTERREPORTING",
+  // "WORKCENTER",
+  // "CLAIMSERVICES",
+];
 
 export const Select_Question = ["Analyze error logs", "Custom"];
+
+/* Filters Options for create bug */
+export const SEVERITY = ["1 - Critical", "2 - High", "3 - Medium", "4 - Low"];
+export const HOW_FOUND = ["System Monitor", "User Reported"];
+export const WHERE_FOUND = ["4 - Dev", "5 - QA"];
+export const FOUND_BY_TEAM = ["WC Pre Estimating Workflow", "Scrum Line"];
+export const TEAMS = ["WC Pre Estimating Workflow", "Scrum Line"];
+export const FOUND_IN_RELEASE = ["2025.2", "2025.3"];
+export const TAGS = ["Dummy cstt_error_log_Analyzer"];
+export const AREA = ["APD\\WorkCenter"];

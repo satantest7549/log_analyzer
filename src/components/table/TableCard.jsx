@@ -16,13 +16,15 @@ const TableCard = () => {
     <Grid container spacing={2} justifyContent="center" mt={5}>
       <Grid item xs={12} sm={6} md={6} lg={6}>
         <TableWrapper
-          level={TableContainerLevel.FINAL_MERGED_DATAFRAME}
+          level={TableContainerLevel.MATCHED_RECORDS}
+          // level={TableContainerLevel.FINAL_MERGED_DATAFRAME}
           data={filteredRow}
         />
       </Grid>
       <Grid item xs={12} sm={6} md={6} lg={6}>
         <TableWrapper
-          level={TableContainerLevel.MATCHED_RECORDS}
+          // level={TableContainerLevel.MATCHED_RECORDS}
+          level={TableContainerLevel.FINAL_MERGED_DATAFRAME}
           data={finalAnalyzedData}
         />
       </Grid>
@@ -36,27 +38,31 @@ const TableWrapper = ({ level, data }) => {
       sx={{
         width: "100%",
         maxWidth: 1200,
-        maxHeight: 300,
+        maxHeight: 400,
         display: "flex",
         flexDirection: "column",
-        gap: 2,
+        gap: 1,
         justifyContent: "space-between",
         alignItems: "center",
-        overflow: "auto",
+        overflow: "hidden",
+        // overflow: "auto",
         boxShadow: 3,
         borderRadius: 2,
-        p: 2,
+        p: 1,
+        // border: "2px solid black",
       }}
     >
       <Box
         sx={{
           width: "100%",
           backgroundColor: "background.paper",
-          px: { xs: 2, sm: 3, md: 4 },
-          py: { xs: 0.5, sm: 1 },
+          // backgroundColor: "primary.light",
+          py: 1,
           borderRadius: 2,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           boxShadow: 1,
-          textAlign: "center",
         }}
       >
         <Typography
@@ -65,6 +71,8 @@ const TableWrapper = ({ level, data }) => {
           sx={{
             fontSize: { xs: "1rem", sm: "1.2rem", md: "1.25rem" },
             color: "primary.main",
+            // color: "primary.contrastText",
+            textAlign: "center",
           }}
           gutterBottom
         >
@@ -72,7 +80,32 @@ const TableWrapper = ({ level, data }) => {
         </Typography>
       </Box>
 
-      <ResultsTable data={data} />
+      <Box
+        sx={{
+          width: "100%",
+          overflow: "auto",
+          maxHeight: 300,
+          "&::-webkit-scrollbar": {
+            height: 8,
+            width: 8,
+          },
+          "&::-webkit-scrollbar-track": {
+            backgroundColor: "#f1f1f1",
+            borderRadius: 4,
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: "#888",
+            borderRadius: 4,
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            backgroundColor: "#555",
+          },
+        }}
+      >
+        <ResultsTable data={data} />
+      </Box>
+
+      {/* <ResultsTable data={data} /> */}
     </Box>
   );
 };
