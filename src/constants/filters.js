@@ -16,7 +16,7 @@ export const APP_NM = [
   // "CLAIMSERVICES",
 ];
 
-export const Select_Question = ["Analyze error logs", "Custom"];
+export const Select_Question = ["Analyze error logs", "Custom"]; 
 
 /* Filters Options for create bug */
 export const SEVERITY = ["1 - Critical", "2 - High", "3 - Medium", "4 - Low"];
