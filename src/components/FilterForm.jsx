@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAnalyzeRequest, fetchCustomAnalyzeRequest } from "../redux";
+import { fetchAnalyzeRequest, fetchCsttDataRequest, fetchCustomAnalyzeRequest } from "../redux";
 import SelectInput from "./common/SelectInput";
 import DateTimeInput from "./common/DateTimeInput";
 import { APP_NM, MODULE_NM, Select_Question } from "../constants";
@@ -24,7 +24,6 @@ import {
 const todayMax = getTodayMaxDateTime();
 
 const FilterFormDrawer = ({
-  onSubmit,
   drawerOpen,
   setDrawerOpen,
   setAnalysisType,
@@ -44,9 +43,10 @@ const FilterFormDrawer = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    onSubmit({ appName, errorModule, fromDateTime, toDateTime });
-    // setDrawerOpen(false);
+    setAnalysisType(null);
+    dispatch(
+      fetchCsttDataRequest({ appName, errorModule, fromDateTime, toDateTime })
+    );
   };
 
   const handleAnalyze = (payload) => {
