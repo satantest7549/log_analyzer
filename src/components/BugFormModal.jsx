@@ -12,7 +12,6 @@ import {
 import SelectInput from "./common/SelectInput";
 import {
   AREA,
-  FOUND_BY_TEAM,
   FOUND_IN_RELEASE,
   HOW_FOUND,
   SEVERITY,
@@ -91,108 +90,6 @@ const BugFormModal = ({ open, onClose, data }) => {
     },
   ];
 
-  // const fields = [
-  //   // {
-  //   //   label: tableHeader.BUG_TITLE,
-  //   //   name: "bug_title",
-  //   //   type: "text",
-  //   //   defaultValue: "",
-  //   // },
-  //   {
-  //     label: "Team",
-  //     name: "team",
-  //     type: "select",
-  //     options: TEAMS,
-  //     defaultValue: TEAMS[1],
-  //   },
-  //   {
-  //     label: "Severity",
-  //     name: "severity",
-  //     type: "select",
-  //     options: SEVERITY,
-  //     defaultValue: SEVERITY[3],
-  //   },
-  //   {
-  //     label: "Version Planned",
-  //     name: "version_planned",
-  //     type: "select",
-  //     options: FOUND_IN_RELEASE,
-  //     defaultValue: FOUND_IN_RELEASE[0],
-  //   },
-
-  //   {
-  //     label: "How Found",
-  //     name: "how_found",
-  //     type: "select",
-  //     options: HOW_FOUND,
-  //     defaultValue: HOW_FOUND[0],
-  //   },
-  //   {
-  //     label: "Where Found",
-  //     name: "where_found",
-  //     type: "select",
-  //     options: WHERE_FOUND,
-  //     defaultValue: WHERE_FOUND[0],
-  //   },
-  //   {
-  //     label: "Found in Release",
-  //     name: "found_in_release",
-  //     type: "select",
-  //     options: FOUND_IN_RELEASE,
-  //     defaultValue: FOUND_IN_RELEASE[0],
-  //   },
-  //   {
-  //     label: "Found by Team",
-  //     name: "found_by_team",
-  //     type: "select",
-  //     options: TEAMS,
-  //     defaultValue: TEAMS[1],
-  //   },
-  //   {
-  //     label: "Area",
-  //     name: "area",
-  //     type: "select",
-  //     options: AREA,
-  //     defaultValue: AREA[0],
-  //   },
-  //   {
-  //     label: "Tags",
-  //     name: "tags",
-  //     type: "select",
-  //     options: TAGS,
-  //     defaultValue: TAGS[0],
-  //   },
-
-  //   // {
-  //   //   label: "Discussion",
-  //   //   name: "discussion",
-  //   //   type: "text",
-  //   //   multiline: true,
-  //   //   defaultValue: "",
-  //   // },
-  //   // {
-  //   //   label: "Workaround",
-  //   //   name: "workAround",
-  //   //   type: "text",
-  //   //   multiline: true,
-  //   //   defaultValue: "",
-  //   // },
-  //   // {
-  //   //   label: "Steps to Reproduce",
-  //   //   name: "stepsToReproduce",
-  //   //   type: "text",
-  //   //   multiline: true,
-  //   //   defaultValue: "",
-  //   // },
-  //   // {
-  //   //   label: "Root Cause Analysis",
-  //   //   name: "rca",
-  //   //   type: "text",
-  //   //   multiline: true,
-  //   //   defaultValue: "",
-  //   // },
-  // ];
-
   const getInitialState = () => {
     const state = {};
     fields.forEach((field) => {
@@ -237,18 +134,17 @@ const BugFormModal = ({ open, onClose, data }) => {
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm" >
       <DialogTitle>Create Bug</DialogTitle>
       <DialogContent>
         <Grid
           container
           spacing={1}
-          p={1}
+          p={2}
           alignItems="flex-start"
-          border={"1px solid blue"}
+          // border={"1px solid blue"}
         >
           {/* Bug Title at the top - full width like a heading */}
-
           <TextField
             label={tableHeader.BUG_TITLE}
             value={formValues[tableHeader.BUG_TITLE]}
@@ -258,7 +154,13 @@ const BugFormModal = ({ open, onClose, data }) => {
           />
 
           {/* Select fields container */}
-          <Grid container item spacing={2} xs={12} border={"1px solid black"}>
+          <Grid
+            container
+            item
+            spacing={1}
+            xs={12}
+            // border={"1px solid black"}
+          >
             {fields
               .filter((f) => f.type === "select")
               .map(({ label, name, options }) => (
