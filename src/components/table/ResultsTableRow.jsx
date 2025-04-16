@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TableCell, TableRow } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { createBugRequest } from "../../redux";
+// import { useDispatch } from "react-redux";
+// import { createBugRequest } from "../../redux";
 import { tableHeader } from "../../constants";
 import { cellStyle, getColumnStyle, indexCellStyle } from "./styles";
 import TableCellWithTooltip from "./TableCellWithTooltip";
@@ -10,12 +10,12 @@ import BugFormModal from "../BugFormModal";
 
 const ResultsTableRow = ({ idx, row, keys, isLoading, setClickedRowIndex }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleCreateBug = () => {
     setClickedRowIndex(idx);
-    dispatch(createBugRequest(row));
-    // setModalOpen(true);
+    // dispatch(createBugRequest(row));
+    setModalOpen(true);
   };
 
   const hasHistoricalSolution = !!row[tableHeader.HISTORICAL_SOLUTION]

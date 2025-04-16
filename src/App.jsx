@@ -9,7 +9,6 @@ import AppBarHeader from "./components/AppBarHeader";
 import Toast from "./components/common/Toast";
 import SummaryCard from "./components/SummaryCard";
 import TableCard from "./components/table/TableCard";
-import ErrorCardPage from "./components/common/ErrorCardPage";
 
 const App = () => {
   const dispatch = useDispatch();
