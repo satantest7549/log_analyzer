@@ -202,13 +202,8 @@ const BugFormModal = ({ open, onClose, data }) => {
     // Add derived values from `data` if present
     if (data) {
       state[tableHeader.BUG_TITLE] = data[tableHeader.BUG_TITLE] || "";
-      state[tableHeader.HISTORICAL_SOLUTION] = data[
-        tableHeader.HISTORICAL_SOLUTION
-      ]
-        ? `<b>${tableHeader.HISTORICAL_SOLUTION}:</b><br/>${
-            data[tableHeader.HISTORICAL_SOLUTION]
-          }`
-        : "";
+      state[tableHeader.HISTORICAL_SOLUTION] =
+        data[tableHeader.HISTORICAL_SOLUTION] || "";
     }
 
     return state;
@@ -232,13 +227,12 @@ const BugFormModal = ({ open, onClose, data }) => {
 
   const handleSubmit = () => {
     // console.log("Final Payload:", formValues);
-
     const finalPayload = {
       ...data,
       ...formValues,
     };
-
     dispatch(createBugRequest(finalPayload));
+    onClose();
     // TODO: dispatch createBugRequest(formValues)
   };
 

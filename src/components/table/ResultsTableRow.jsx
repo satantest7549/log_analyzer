@@ -14,8 +14,8 @@ const ResultsTableRow = ({ idx, row, keys, isLoading, setClickedRowIndex }) => {
 
   const handleCreateBug = () => {
     setClickedRowIndex(idx);
-    dispatch(createBugRequest(row));
-    // setModalOpen(true);
+    // dispatch(createBugRequest(row));
+    setModalOpen(true);
   };
 
   const hasHistoricalSolution = !!row[tableHeader.HISTORICAL_SOLUTION]

@@ -12,6 +12,7 @@ const BugSuccessMessage = ({
   const ORG = ENV_APP_CONFIG.AZURE_ORG;
   const PROJECT = ENV_APP_CONFIG.AZURE_PROJECT;
 
+  // const devOpsUrl = "http://127.0.0.1:8002/create/bug"
   const devOpsUrl = `${AZURE_DOMAIN}/${ORG}/${PROJECT}/_workitems/edit/${bugId}`;
 
   return (
