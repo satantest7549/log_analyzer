@@ -188,7 +188,7 @@
 
 // export default BugFormModal;
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import {
   Dialog,
@@ -274,7 +274,7 @@ const getInitialState = (fields, data) => {
 // -------------------- Component --------------------
 const BugFormModal = ({ open, onClose, data }) => {
   const dispatch = useDispatch();
-  const fields = getFormFields();
+  const fields = useMemo(() => getFormFields(), []);
 
   const [formValues, setFormValues] = useState(() =>
     getInitialState(fields, data)
