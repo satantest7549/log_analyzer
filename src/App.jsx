@@ -1,8 +1,9 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
 import { CircularProgress, Box, Typography } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCsttDataRequest } from "./redux";
+import { useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
+// import { fetchCsttDataRequest } from "./redux";
 import FilterFormDrawer from "./components/FilterForm";
 import BugSuccessMessage from "./components/common/BugSuccessMessage";
 import AppBarHeader from "./components/AppBarHeader";
@@ -11,7 +12,7 @@ import SummaryCard from "./components/SummaryCard";
 import TableCard from "./components/table/TableCard";
 
 const App = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [bugToastOpen, setBugToastOpen] = useState(false);
   const [toast, setToast] = useState({
@@ -37,7 +38,7 @@ const App = () => {
   const error = csttError || analyzeError || bugCreatedError;
 
   useEffect(() => {
-    // Handle error case: show a toast when there is an error 
+    // Handle error case: show a toast when there is an error
     if (error) {
       const errorMessage =
         typeof error === "string"
@@ -78,12 +79,12 @@ const App = () => {
     setToast({ ...toast, open: false });
   };
 
-  const handleSubmit = ({ appName, errorModule, fromDateTime, toDateTime }) => {
-    setAnalysisType(null);
-    dispatch(
-      fetchCsttDataRequest({ appName, errorModule, fromDateTime, toDateTime })
-    );
-  };
+  // const handleSubmit = ({ appName, errorModule, fromDateTime, toDateTime }) => {
+  //   setAnalysisType(null);
+  //   dispatch(
+  //     fetchCsttDataRequest({ appName, errorModule, fromDateTime, toDateTime })
+  //   );
+  // };
 
   return (
     <Box>
@@ -92,7 +93,7 @@ const App = () => {
 
       {/* Filter Drawer */}
       <FilterFormDrawer
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
         drawerOpen={drawerOpen}
         setDrawerOpen={setDrawerOpen}
         setAnalysisType={setAnalysisType}

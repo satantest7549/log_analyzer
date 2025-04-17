@@ -57,12 +57,9 @@ const TableWrapper = ({ level, data }) => {
           width: "100%",
           backgroundColor: "background.paper",
           // backgroundColor: "primary.light",
-          py: 1,
+          p: 1,
           borderRadius: 2,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          boxShadow: 1,
+          boxShadow: data.length > 0 ? 1 : 0,
         }}
       >
         <Typography
@@ -80,30 +77,32 @@ const TableWrapper = ({ level, data }) => {
         </Typography>
       </Box>
 
-      <Box
-        sx={{
-          width: "100%",
-          overflow: "auto",
-          maxHeight: 300,
-          "&::-webkit-scrollbar": {
-            height: 8,
-            width: 8,
-          },
-          "&::-webkit-scrollbar-track": {
-            backgroundColor: "#f1f1f1",
-            borderRadius: 4,
-          },
-          "&::-webkit-scrollbar-thumb": {
-            backgroundColor: "#888",
-            borderRadius: 4,
-          },
-          "&::-webkit-scrollbar-thumb:hover": {
-            backgroundColor: "#555",
-          },
-        }}
-      >
-        <ResultsTable data={data} />
-      </Box>
+      {data.length > 0 && (
+        <Box
+          sx={{
+            width: "100%",
+            overflow: "auto",
+            maxHeight: 300,
+            "&::-webkit-scrollbar": {
+              height: 8,
+              width: 8,
+            },
+            "&::-webkit-scrollbar-track": {
+              backgroundColor: "#f1f1f1",
+              borderRadius: 4,
+            },
+            "&::-webkit-scrollbar-thumb": {
+              backgroundColor: "#888",
+              borderRadius: 4,
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              backgroundColor: "#555",
+            },
+          }}
+        >
+          <ResultsTable data={data} />
+        </Box>
+      )}
 
       {/* <ResultsTable data={data} /> */}
     </Box>

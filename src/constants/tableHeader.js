@@ -1,8 +1,8 @@
 export const TableContainerLevel = {
   MATCHED_RECORDS: "Matched Records",
   FINAL_MERGED_DATAFRAME: "Final Merged Data Frame",
+  NO_RECORDS_FOUND: "No Records Found",
 };
-
 
 export const tableHeader = {
   SERIAL_NUMBER: "S. No.",
