@@ -1,7 +1,18 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Paper, Typography, Box } from "@mui/material";
+import {
+  Paper,
+  Typography,
+  Box,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  TableContainer,
+  Paper as MuiPaper,
+} from "@mui/material";
 
 const SummaryCard = ({ data }) => {
   if (!data) return null;
@@ -17,8 +28,8 @@ const MarkdownRenderer = ({ markdownContent }) => {
         borderRadius: "8px",
         boxShadow: 3,
         margin: "50px auto",
-        // margin: "auto",
         p: 2,
+        overflowX: "auto",
       }}
     >
       <Typography
@@ -28,7 +39,6 @@ const MarkdownRenderer = ({ markdownContent }) => {
         📊 AI Summary
       </Typography>
       <ReactMarkdown
-        children={markdownContent}
         remarkPlugins={[remarkGfm]}
         components={{
           p: ({ children }) => (
@@ -76,7 +86,12 @@ const MarkdownRenderer = ({ markdownContent }) => {
             </Typography>
           ),
           ul: ({ children }) => (
-            <Box component="ul" sx={{ pl: 3, textAlign: "left", mb: 2 }}>
+            <Box component="ul" sx={{ pl: 3, mb: 2, textAlign: "left" }}>
+              {children}
+            </Box>
+          ),
+          ol: ({ children }) => (
+            <Box component="ol" sx={{ pl: 3, mb: 2, textAlign: "left" }}>
               {children}
             </Box>
           ),
@@ -87,8 +102,44 @@ const MarkdownRenderer = ({ markdownContent }) => {
               </Typography>
             </li>
           ),
+          blockquote: ({ children }) => (
+            <Box
+              component="blockquote"
+              sx={{
+                pl: 2,
+                borderLeft: "4px solid #ccc",
+                color: "gray",
+                fontStyle: "italic",
+                mb: 2,
+                textAlign: "left",
+              }}
+            >
+              {children}
+            </Box>
+          ),
+          table: ({ children }) => (
+            <TableContainer
+              component={MuiPaper}
+              sx={{ mb: 3, maxHeight: 300, overflow: "auto" }}
+            >
+              <Table size="small" stickyHeader>
+                {children}
+              </Table>
+            </TableContainer>
+          ),
+          thead: ({ children }) => <TableHead>{children}</TableHead>,
+          tbody: ({ children }) => <TableBody>{children}</TableBody>,
+          tr: ({ children }) => <TableRow>{children}</TableRow>,
+          th: ({ children }) => (
+            <TableCell sx={{ fontWeight: "bold", backgroundColor: "#f0f0f0" }}>
+              {children}
+            </TableCell>
+          ),
+          td: ({ children }) => <TableCell>{children}</TableCell>,
         }}
-      />
+      >
+        {markdownContent}
+      </ReactMarkdown>
     </Paper>
   );
 };

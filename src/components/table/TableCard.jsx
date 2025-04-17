@@ -14,20 +14,24 @@ const TableCard = () => {
 
   return (
     <Grid container spacing={2} justifyContent="center" mt={5}>
-      <Grid item xs={12} sm={6} md={6} lg={6}>
-        <TableWrapper
-          level={TableContainerLevel.MATCHED_RECORDS}
-          // level={TableContainerLevel.FINAL_MERGED_DATAFRAME}
-          data={filteredRow}
-        />
-      </Grid>
-      <Grid item xs={12} sm={6} md={6} lg={6}>
-        <TableWrapper
-          // level={TableContainerLevel.MATCHED_RECORDS}
-          level={TableContainerLevel.FINAL_MERGED_DATAFRAME}
-          data={finalAnalyzedData}
-        />
-      </Grid>
+      {filteredRow.length > 0 && (
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <TableWrapper
+            level={TableContainerLevel.MATCHED_RECORDS}
+            // level={TableContainerLevel.FINAL_MERGED_DATAFRAME}
+            data={filteredRow}
+          />
+        </Grid>
+      )}
+      {finalAnalyzedData.length > 0 && (
+        <Grid item xs={12} sm={6} md={6} lg={6}>
+          <TableWrapper
+            // level={TableContainerLevel.MATCHED_RECORDS}
+            level={TableContainerLevel.FINAL_MERGED_DATAFRAME}
+            data={finalAnalyzedData}
+          />
+        </Grid>
+      )}
     </Grid>
   );
 };
@@ -37,7 +41,7 @@ const TableWrapper = ({ level, data }) => {
     <Box
       sx={{
         width: "100%",
-        maxWidth: 1200,
+        // maxHeight: "80vh",
         maxHeight: 400,
         display: "flex",
         flexDirection: "column",
@@ -45,7 +49,6 @@ const TableWrapper = ({ level, data }) => {
         justifyContent: "space-between",
         alignItems: "center",
         overflow: "hidden",
-        // overflow: "auto",
         boxShadow: 3,
         borderRadius: 2,
         p: 1,
@@ -77,34 +80,7 @@ const TableWrapper = ({ level, data }) => {
         </Typography>
       </Box>
 
-      {data.length > 0 && (
-        <Box
-          sx={{
-            width: "100%",
-            overflow: "auto",
-            maxHeight: 300,
-            "&::-webkit-scrollbar": {
-              height: 8,
-              width: 8,
-            },
-            "&::-webkit-scrollbar-track": {
-              backgroundColor: "#f1f1f1",
-              borderRadius: 4,
-            },
-            "&::-webkit-scrollbar-thumb": {
-              backgroundColor: "#888",
-              borderRadius: 4,
-            },
-            "&::-webkit-scrollbar-thumb:hover": {
-              backgroundColor: "#555",
-            },
-          }}
-        >
-          <ResultsTable data={data} />
-        </Box>
-      )}
-
-      {/* <ResultsTable data={data} /> */}
+      {data.length > 0 && <ResultsTable data={data} />}
     </Box>
   );
 };
