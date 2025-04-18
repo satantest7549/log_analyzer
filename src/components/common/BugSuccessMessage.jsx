@@ -6,17 +6,18 @@ const BugSuccessMessage = ({
   bugId,
   open,
   onClose,
-  autoHideDuration = 4000,
+  autoHideDuration = 3000,
 }) => {
   const AZURE_DOMAIN = ENV_APP_CONFIG.AZURE_API_DOMAIN;
   const ORG = ENV_APP_CONFIG.AZURE_ORG;
   const PROJECT = ENV_APP_CONFIG.AZURE_PROJECT;
 
-  // const devOpsUrl = "http://127.0.0.1:8002/create/bug"
+  // const devOpsUrl = "http://127.0.0.1:8002/create/bug";
   const devOpsUrl = `${AZURE_DOMAIN}/${ORG}/${PROJECT}/_workitems/edit/${bugId}`;
 
   return (
     <Snackbar
+      key={bugId}
       open={open}
       autoHideDuration={autoHideDuration}
       onClose={onClose}

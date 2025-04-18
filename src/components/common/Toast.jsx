@@ -7,9 +7,11 @@ const Toast = ({
   severity = "success",
   message,
   autoHideDuration = 3000,
+  key,
 }) => {
   return (
     <Snackbar
+      key={key}
       open={open}
       autoHideDuration={autoHideDuration}
       onClose={onClose}
