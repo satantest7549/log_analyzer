@@ -1,23 +1,19 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CircularProgress, Box, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
 import FilterFormDrawer from "./components/FilterForm";
 import BugSuccessMessage from "./components/common/BugSuccessMessage";
 import AppBarHeader from "./components/AppBarHeader";
-import Toast from "./components/common/Toast";
 import SummaryCard from "./components/SummaryCard";
 import TableCard from "./components/table/TableCard";
+import { useToast } from "./context";
 
 const App = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [bugToastOpen, setBugToastOpen] = useState(false);
-  const [toast, setToast] = useState({
-    open: false,
-    message: "",
-    severity: "success",
-  });
   const [analysisType, setAnalysisType] = useState(null);
+  const showToast = useToast();
 
   // Redux selectors
   const {
@@ -43,22 +39,43 @@ const App = () => {
           : error?.message || "An unexpected error occurred";
       showToast(errorMessage, "error");
     }
-  }, [error]);
+  }, [error, showToast]);
+
+  // inside App component
+  const prevCsttRef = useRef([]);
+  const prevAnalyzedRef = useRef([]);
+  const prevCustomAnalyzedRef = useRef(null);
+  const prevBugRef = useRef(null);
 
   useEffect(() => {
-    if (finalCsttData.length > 0) {
+    if (finalCsttData.length > 0 && finalCsttData !== prevCsttRef.current) {
+      prevCsttRef.current = finalCsttData;
       showToast(`${finalCsttData.length} records fetched successfully!`);
     }
-    if (finalAnalyzedData.length > 0) {
+
+    if (
+      finalAnalyzedData.length > 0 &&
+      finalAnalyzedData !== prevAnalyzedRef.current
+    ) {
+      prevAnalyzedRef.current = finalAnalyzedData;
       showToast(
         `${finalAnalyzedData.length} matched records fetched successfully!`
       );
     }
-    if (finalCustomAnalyzedData !== null) {
+
+    if (
+      finalCustomAnalyzedData !== null &&
+      finalCustomAnalyzedData !== prevCustomAnalyzedRef.current
+    ) {
+      prevCustomAnalyzedRef.current = finalCustomAnalyzedData;
       showToast("Analysed response fetched successfully!");
     }
 
-    if (finalReaponseBugCreated !== null) {
+    if (
+      finalReaponseBugCreated !== null &&
+      finalReaponseBugCreated !== prevBugRef.current
+    ) {
+      prevBugRef.current = finalReaponseBugCreated;
       setBugToastOpen(true);
     }
   }, [
@@ -66,16 +83,8 @@ const App = () => {
     finalAnalyzedData,
     finalCustomAnalyzedData,
     finalReaponseBugCreated,
+    showToast,
   ]);
-
-  const showToast = (message, severity = "success") => {
-    setToast({ open: true, message, severity });
-  };
-
-  const handleCloseToast = () => {
-    setToast({ ...toast, open: false });
-  };
-
   return (
     <Box>
       {/* AppBar */}
@@ -98,18 +107,14 @@ const App = () => {
         finalAnalyzedData.length > 0 && <TableCard />
       )}
 
-      {/* Toasts */}
-      <Toast
-        open={toast.open}
-        onClose={handleCloseToast}
-        message={toast.message}
-        severity={toast.severity}
-      />
       {finalReaponseBugCreated && (
         <BugSuccessMessage
           bugId={finalReaponseBugCreated.id}
           open={bugToastOpen}
-          onClose={() => setBugToastOpen(false)}
+          onClose={() => {
+            setBugToastOpen(false);
+            // prevBugRef.current = null;
+          }}
         />
       )}
     </Box>
