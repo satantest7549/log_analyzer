@@ -8,13 +8,13 @@ import ResultsTable from "./ResultsTable";
 const TableCard = () => {
   const finalAnalyzedData = useSelector((state) => state.analyze.analyzeData);
 
-  const filteredRow = finalAnalyzedData.filter(
-    (item) => item[tableHeader.HISTORICAL_SOLUTION].trim() !== ""
-  );
+  // const filteredRow = finalAnalyzedData.filter(
+  //   (item) => item[tableHeader.HISTORICAL_SOLUTION].trim() !== ""
+  // );
 
   return (
     <Grid container spacing={2} justifyContent="center" mt={5}>
-      {filteredRow.length > 0 && (
+      {/* {filteredRow.length > 0 && (
         <Grid item xs={12} sm={6} md={6} lg={6}>
           <TableWrapper
             level={TableContainerLevel.MATCHED_RECORDS}
@@ -22,7 +22,7 @@ const TableCard = () => {
             data={filteredRow}
           />
         </Grid>
-      )}
+      )} */}
       {finalAnalyzedData.length > 0 && (
         <Grid item xs={12} sm={6} md={6} lg={6}>
           <TableWrapper
@@ -41,8 +41,8 @@ const TableWrapper = ({ level, data }) => {
     <Box
       sx={{
         width: "100%",
-        // maxHeight: "80vh",
-        maxHeight: 400,
+        maxHeight: "80vh",
+        // maxHeight: 400,
         display: "flex",
         flexDirection: "column",
         gap: 1,
