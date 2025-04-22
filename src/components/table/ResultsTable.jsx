@@ -13,7 +13,11 @@ const ResultsTable = ({ data }) => {
   if (!data || data.length === 0) return null;
 
   const keys = Object.keys(data[0]).filter(
-    (key) => key !== tableHeader.PAGE_NAME && key !== tableHeader.BUG_TITLE
+    (key) =>
+      key !== tableHeader.PAGE_NAME &&
+      key !== tableHeader.BUG_TITLE &&
+      key !== tableHeader.OCCURRENCE_COUNT &&
+      key !== tableHeader.ERROR_HEADER
   );
 
   return (

@@ -68,7 +68,7 @@ const App = () => {
       finalAnalyzedData !== prevAnalyzedRef.current
     ) {
       prevAnalyzedRef.current = finalAnalyzedData;
-      showToast(`${finalAnalyzedData.length} analyzed successfully!`);
+      showToast(`${finalAnalyzedData.length} records analyzed successfully!`);
     }
 
     // Custom analyzed data toast
