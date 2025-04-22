@@ -56,7 +56,7 @@ const App = () => {
       prevCsttLengthRef.current = csttDataLength;
       showToast(`${csttDataLength} records fetched successfully!`);
     }
-    
+
     // if (finalCsttData.length > 0 && finalCsttData !== prevCsttRef.current) {
     //   prevCsttRef.current = finalCsttData;
     //   showToast(`${finalCsttData.length} records fetched successfully!`);
@@ -68,9 +68,7 @@ const App = () => {
       finalAnalyzedData !== prevAnalyzedRef.current
     ) {
       prevAnalyzedRef.current = finalAnalyzedData;
-      showToast(
-        `${finalAnalyzedData.length} matched records fetched successfully!`
-      );
+      showToast(`${finalAnalyzedData.length} analyzed successfully!`);
     }
 
     // Custom analyzed data toast
@@ -79,7 +77,7 @@ const App = () => {
       finalCustomAnalyzedData !== prevCustomAnalyzedRef.current
     ) {
       prevCustomAnalyzedRef.current = finalCustomAnalyzedData;
-      showToast("Analysed response fetched successfully!");
+      showToast("Analysed successfully!");
     }
 
     // Bug created toast
