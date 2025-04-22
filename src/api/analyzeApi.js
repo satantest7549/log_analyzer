@@ -6,10 +6,9 @@ const baseUrl = ENV_APP_CONFIG.ANALYZE_API_BASE_URL;
 
 //API using filtered from cstt api response data as payload
 export const fetchAnalyzeData = async (payload) => {
-  
   const response = await axios.post(`${baseUrl}/analyze`, payload);
 
-  const finalResult = transformCsttResponse(response.data);
+  const finalResult = transformCsttResponse(response.data.results);
 
   return finalResult;
 };

@@ -11,10 +11,14 @@ import {
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAnalyzeRequest, fetchCsttDataRequest, fetchCustomAnalyzeRequest } from "../redux";
+import {
+  fetchAnalyzeRequest,
+  fetchCsttDataRequest,
+  fetchCustomAnalyzeRequest,
+} from "../redux";
 import SelectInput from "./common/SelectInput";
 import DateTimeInput from "./common/DateTimeInput";
-import { APP_NM, MODULE_NM, Select_Question } from "../constants";
+import { APP_NM, MODULE_MAP, MODULE_NM, Select_Question } from "../constants";
 import {
   getCurrentFormattedDateTime,
   getFormattedDateTimeNDaysAgo,
@@ -23,13 +27,11 @@ import {
 
 const todayMax = getTodayMaxDateTime();
 
-const FilterFormDrawer = ({
-  drawerOpen,
-  setDrawerOpen,
-  setAnalysisType,
-}) => {
-  const [errorModule, setErrorModule] = useState(MODULE_NM[0]);
+const FilterFormDrawer = ({ drawerOpen, setDrawerOpen, setAnalysisType }) => {
   const [appName, setAppName] = useState(APP_NM[0]);
+  const [moduleOptions, setModuleOptions] = useState(MODULE_MAP[APP_NM[0]]);
+  const [errorModule, setErrorModule] = useState(MODULE_MAP[APP_NM[0]][0]);
+  // const [errorModule, setErrorModule] = useState(MODULE_NM[0]);
   const [selectQuestion, setSelectQuestion] = useState(Select_Question[0]);
   const [fromDateTime, setFromDateTime] = useState(
     getFormattedDateTimeNDaysAgo(7)
@@ -40,6 +42,14 @@ const FilterFormDrawer = ({
   const dispatch = useDispatch();
   const finalCsttData = useSelector((state) => state.cstt);
   const analyzeLoading = useSelector((state) => state.analyze.loading);
+
+  const handleAppNameChange = (e) => {
+    const selectedApp = e.target.value;
+    const relatedModules = MODULE_MAP[selectedApp] || [];
+    setAppName(selectedApp);
+    setModuleOptions(relatedModules);
+    setErrorModule(relatedModules[0] || "");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,16 +95,25 @@ const FilterFormDrawer = ({
 
         <form onSubmit={handleSubmit}>
           <SelectInput
-            label="APP_NAME"
+            label="Application Name"
             value={appName}
-            onChange={(e) => setAppName(e.target.value)}
+            onChange={handleAppNameChange}
             options={APP_NM}
+            fullWidth
+            variant="outlined"
+            sx={{ mb: 2, "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
+            FormLabelProps={{ sx: { fontWeight: 500, color: "text.primary" } }}
           />
+
           <SelectInput
-            label="MODULE_NAME"
+            label="Module Name"
             value={errorModule}
             onChange={(e) => setErrorModule(e.target.value)}
-            options={MODULE_NM}
+            options={moduleOptions}
+            fullWidth
+            variant="outlined"
+            sx={{ mb: 2, "& .MuiOutlinedInput-root": { borderRadius: 2 } }}
+            FormLabelProps={{ sx: { fontWeight: 500, color: "text.primary" } }}
           />
           <DateTimeInput
             label="From Date-Time"
