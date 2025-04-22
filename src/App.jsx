@@ -17,7 +17,7 @@ const App = () => {
 
   // Redux selectors
   const {
-    cstt: { loading: csttLoading, finalData: finalCsttData, error: csttError },
+    cstt: { loading: csttLoading, error: csttError, csttDataLength },
     analyze: {
       loading: analyzeLoading,
       error: analyzeError,
@@ -42,17 +42,27 @@ const App = () => {
   }, [error, showToast]);
 
   // inside App component
-  const prevCsttRef = useRef([]);
+  const prevCsttLengthRef = useRef(null);
   const prevAnalyzedRef = useRef([]);
   const prevCustomAnalyzedRef = useRef(null);
   const prevBugRef = useRef(null);
 
   useEffect(() => {
-    if (finalCsttData.length > 0 && finalCsttData !== prevCsttRef.current) {
-      prevCsttRef.current = finalCsttData;
-      showToast(`${finalCsttData.length} records fetched successfully!`);
+    // Cstt data toast
+    if (
+      csttDataLength !== null &&
+      csttDataLength !== prevCsttLengthRef.current
+    ) {
+      prevCsttLengthRef.current = csttDataLength;
+      showToast(`${csttDataLength} records fetched successfully!`);
     }
+    
+    // if (finalCsttData.length > 0 && finalCsttData !== prevCsttRef.current) {
+    //   prevCsttRef.current = finalCsttData;
+    //   showToast(`${finalCsttData.length} records fetched successfully!`);
+    // }
 
+    // Analyzed data toast
     if (
       finalAnalyzedData.length > 0 &&
       finalAnalyzedData !== prevAnalyzedRef.current
@@ -63,6 +73,7 @@ const App = () => {
       );
     }
 
+    // Custom analyzed data toast
     if (
       finalCustomAnalyzedData !== null &&
       finalCustomAnalyzedData !== prevCustomAnalyzedRef.current
@@ -71,6 +82,7 @@ const App = () => {
       showToast("Analysed response fetched successfully!");
     }
 
+    // Bug created toast
     if (
       finalReaponseBugCreated !== null &&
       finalReaponseBugCreated !== prevBugRef.current
@@ -79,7 +91,8 @@ const App = () => {
       setBugToastOpen(true);
     }
   }, [
-    finalCsttData,
+    csttDataLength,
+    // finalCsttData,
     finalAnalyzedData,
     finalCustomAnalyzedData,
     finalReaponseBugCreated,

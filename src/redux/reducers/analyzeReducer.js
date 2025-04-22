@@ -5,6 +5,7 @@ import {
   FETCH_CUSTOM_ANALYZE_DATA_FAILURE,
   FETCH_CUSTOM_ANALYZE_DATA_REQUEST,
   FETCH_CUSTOM_ANALYZE_DATA_SUCCESS,
+  RESET_ANALYZE_STATE,
 } from "../actions";
 
 const initialState = {
@@ -33,6 +34,11 @@ const analyzeReducer = (state = initialState, action) => {
 
     case FETCH_CUSTOM_ANALYZE_DATA_FAILURE:
       return { ...state, loading: false, error: action.payload };
+
+    case RESET_ANALYZE_STATE:
+      return {
+        ...initialState,
+      };
 
     default:
       return state;

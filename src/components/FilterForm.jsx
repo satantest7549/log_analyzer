@@ -135,7 +135,12 @@ const FilterFormDrawer = ({ drawerOpen, setDrawerOpen, setAnalysisType }) => {
             onChange={(e) => setToDateTime(e.target.value)}
             max={todayMax}
           />
-          {finalCsttData.finalData.length > 0 && (
+          {/* {finalCsttData.finalData.length > 0 && (
+            <Alert severity="success" sx={{ mt: 2 }}>
+              {`${finalCsttData.finalData.length} records fetched successfully!`}
+            </Alert>
+          )} */}
+          {finalCsttData.csttDataLength !== null && (
             <Alert severity="success" sx={{ mt: 2 }}>
               {`${finalCsttData.finalData.length} records fetched successfully!`}
             </Alert>
