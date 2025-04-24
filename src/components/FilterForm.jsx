@@ -74,6 +74,14 @@ const FilterFormDrawer = ({ drawerOpen, setDrawerOpen, setAnalysisType }) => {
     // setDrawerOpen(false);
   };
 
+  const handleResetFilters = () => {
+    setAppName(APP_NM[0]);
+    setModuleOptions(MODULE_MAP[APP_NM[0]]);
+    setErrorModule(MODULE_MAP[APP_NM[0]][0]);
+    setFromDateTime(getFormattedDateTimeNDaysAgo(7));
+    setToDateTime(getCurrentFormattedDateTime());
+  };
+
   return (
     <Drawer
       anchor="left"
@@ -85,7 +93,7 @@ const FilterFormDrawer = ({ drawerOpen, setDrawerOpen, setAnalysisType }) => {
           display="flex"
           justifyContent="space-between"
           alignItems="center"
-          mb={2}
+          // mb={1}
         >
           <Typography variant="h6">Filter Logs</Typography>
           <IconButton onClick={() => setDrawerOpen(false)}>
@@ -146,11 +154,36 @@ const FilterFormDrawer = ({ drawerOpen, setDrawerOpen, setAnalysisType }) => {
             </Alert>
           )}
 
-          <Box mt={2}>
+          <Box
+            mt={2}
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            <Button
+              variant="contained"
+              onClick={handleResetFilters}
+              // size="small"
+              // type="submit"
+              // fullWidth
+              // disabled={finalCsttData.loading}
+              // startIcon={
+              //   finalCsttData.loading && (
+              //     <CircularProgress size={20} color="inherit" />
+              //   )
+              // }
+            >
+              {finalCsttData.loading ? "Loading..." : "Clear filters"}
+            </Button>
             <Button
               variant="contained"
               type="submit"
-              fullWidth
+              // size="small"
+              // fullWidth
               disabled={finalCsttData.loading}
               startIcon={
                 finalCsttData.loading && (
